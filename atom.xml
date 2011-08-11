@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>&lt;blog&gt;</title>
+  <link href="http://tpett.github.com/atom.xml" rel="self"/>
+  <link href="http://tpett.github.com/"/>
+  <updated>2011-08-10T23:23:27-05:00</updated>
+  <id>http://tpett.github.com/</id>
+  <author>
+    <name>Travis Petticrew</name>
+    
+  </author>
+
+  
+  <entry>
+    <title>SSH With Multiple Keys</title>
+    <link href="http://tpett.github.com/blog/2011/08/10/ssh-with-multiple-keys/"/>
+    <updated>2011-08-10T21:11:00-05:00</updated>
+    <id>http://tpett.github.com/blog/2011/08/10/ssh-with-multiple-keys</id>
+    <content type="html">&lt;p&gt;I help manage a handfull of servers at work, and I have gotten tired of
+typing SSH passwords all the time. Of course, I could just copy my
+public key over to each server's &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt; file, but I
+have to maintain that on every server. Too much work.&lt;/p&gt;
+
+&lt;p&gt;Luckily, all of the servers already have a key in their authorized_keys
+as part of their build process (for other purposes), and I know the
+associated private key. We'll call these the &quot;work&quot; key pair. I don't
+want to overwrite my keys with this pair because I use my keys for
+personal stuff. It sure would be nice if I could use the work key pair just
+for these servers. It turns out I can.&lt;/p&gt;
+
+&lt;p&gt;I copied the &quot;work&quot; key pair into my local &lt;code&gt;.ssh&lt;/code&gt; folder as &lt;code&gt;work_rsa&lt;/code&gt; and
+&lt;code&gt;work_rsa.pub&lt;/code&gt;. Now I can ssh into the server using:&lt;/p&gt;
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;pre&gt;&lt;code&gt;$ ssh -i ~/.ssh/work_rsa server1.work_domain.com&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Yay, no password! However, now my command is ugly. That won't do. We can
+fix this using the &lt;code&gt;~/.ssh/config&lt;/code&gt; file to set individual options for a
+specific host. Since all of my work servers are on the same domain I can
+set up a wildcard to set the option for all machines on that domain:&lt;/p&gt;
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;SSH Config &lt;/span&gt;&lt;/figcaption&gt;
+&lt;pre&gt;&lt;code&gt;# Contents of ~/.ssh/config
+Host *.work_domain.com
+  IdentityFile ~/.ssh/work_rsa&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;pre&gt;&lt;code&gt;$ ssh server1.work_domain.com&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Much better!&lt;/p&gt;
+
+&lt;h2&gt;Lazy? Me too!&lt;/h2&gt;
+
+&lt;p&gt;In my ongoing effort to reduce key strokes I set up a bash function for
+my most common SSH command:&lt;/p&gt;
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;bash_profile.sh &lt;/span&gt;&lt;/figcaption&gt;
+ &lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class='sh'&gt;&lt;div class='line'&gt;  &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;sshw&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class='line'&gt;    ssh user@&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;.work_domain.com
+&lt;/div&gt;&lt;div class='line'&gt;  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now all I have to do is type the name of the machine without the domain
+or user:&lt;/p&gt;
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;pre&gt;&lt;code&gt;$ sshw server1&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I hope my diligence in pursuing laziness is helpful to you.&lt;/p&gt;
+</content>
+  </entry>
+  
+</feed>

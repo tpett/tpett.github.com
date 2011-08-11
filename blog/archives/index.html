@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>&lt;blog&gt;</title>
+  <title>&lt;blog&gt;: Blog Archive</title>
   <meta name="author" content="Travis Petticrew">
   
 
@@ -16,7 +16,7 @@
 
   
 
-  <link rel="canonical" href="http://tpett.github.com/index.html"/>
+  <link rel="canonical" href="http://tpett.github.com/blog/archives/index.html"/>
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,105 +81,34 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
-
-
-
-  <article>
-    
+      <div>
+<article>
   <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/10/ssh-with-multiple-keys/">SSH With Multiple Keys</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2011-08-10 21:11:00 -0500" pubdate  updated >Aug 10<span>th</span>, 2011</time>
-
-
-</p>
+    <h1 class="entry-title">Blog Archive</h1>
     
   </header>
-
-
-  <div class="entry-content"><p>I help manage a handfull of servers at work, and I have gotten tired of
-typing SSH passwords all the time. Of course, I could just copy my
-public key over to each server&#8217;s <code>~/.ssh/authorized_keys</code> file, but I
-have to maintain that on every server. Too much work.</p>
-
-<p>Luckily, all of the servers already have a key in their authorized_keys
-as part of their build process (for other purposes), and I know the
-associated private key. We&#8217;ll call these the &#8220;work&#8221; key pair. I don&#8217;t
-want to overwrite my keys with this pair because I use my keys for
-personal stuff. It sure would be nice if I could use the work key pair just
-for these servers. It turns out I can.</p>
-
-<p>I copied the &#8220;work&#8221; key pair into my local <code>.ssh</code> folder as <code>work_rsa</code> and
-<code>work_rsa.pub</code>. Now I can ssh into the server using:</p>
-
-<div><figure role=code><pre><code>$ ssh -i ~/.ssh/work_rsa server1.work_domain.com</code></pre></figure></div>
-
-
-<p>Yay, no password! However, now my command is ugly. That won&#8217;t do. We can
-fix this using the <code>~/.ssh/config</code> file to set individual options for a
-specific host. Since all of my work servers are on the same domain I can
-set up a wildcard to set the option for all machines on that domain:</p>
-
-<div><figure role=code><figcaption><span>SSH Config </span></figcaption>
-<pre><code># Contents of ~/.ssh/config
-Host *.work_domain.com
-  IdentityFile ~/.ssh/work_rsa</code></pre></figure></div>
+  <div id="blog-archives">
 
 
 
+  
+  <h2>2011</h2>
 
-<div><figure role=code><pre><code>$ ssh server1.work_domain.com</code></pre></figure></div>
-
-
-<p>Much better!</p>
-
-<h2>Lazy? Me too!</h2>
-
-<p>In my ongoing effort to reduce key strokes I set up a bash function for
-my most common SSH command:</p>
-
-<div><figure role=code><figcaption><span>bash_profile.sh </span></figcaption>
- <div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class='sh'><div class='line'>  <span class="k">function </span>sshw<span class="o">()</span> <span class="o">{</span>
-</div><div class='line'>    ssh user@<span class="nv">$1</span>.work_domain.com
-</div><div class='line'>  <span class="o">}</span>
-</div></code></pre></td></tr></table></div></figure></div>
+<article>
+  
+<h1><a href="/blog/2011/08/10/ssh-with-multiple-keys/">SSH With Multiple Keys</a></h1>
+<time datetime="2011-08-10 21:11:00 -0500" pubdate><span class='month'>Aug</span> <span class='day'>10</span> <span class='year'>2011</span></time>
 
 
-<p>Now all I have to do is type the name of the machine without the domain
-or user:</p>
-
-<div><figure role=code><pre><code>$ sshw server1</code></pre></figure></div>
-
-
-<p>I hope my diligence in pursuing laziness is helpful to you.</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/blog/2011/08/10/ssh-with-multiple-keys/">Read on &rarr;</a>
-  </footer>
-
-
-  </article>
-
-<nav role="pagination">
-  <div>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</nav>
+</article>
 
 </div>
+
+  
+</article>
+
+</div>
+
 <aside role=sidebar>
   
     <section>
