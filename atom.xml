@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>humble hubris</title>
+  <title>a blog</title>
   <link href="http://tpett.github.com/atom.xml" rel="self"/>
   <link href="http://tpett.github.com/"/>
-  <updated>2011-08-11T00:16:11-05:00</updated>
+  <updated>2011-11-07T10:25:15-06:00</updated>
   <id>http://tpett.github.com/</id>
   <author>
     <name>Travis Petticrew</name>
